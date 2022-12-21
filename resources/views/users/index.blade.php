@@ -7,6 +7,10 @@
 
         <h1 class="">Listagem dos Usuarios <a href="{{ route('users.create') }}"><ion-icon name="add-circle-outline"></ion-icon></a> </h1>
 
+        <form action="{{ route('users.index') }}" method="get">
+            <input type="search" name="search" placeholder="Pesquisar">
+            <button class="btn btn-primary">Pesquisar</button>
+        </form>
         <table class="table">
             <thead>
                 <tr>
