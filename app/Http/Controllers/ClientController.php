@@ -12,10 +12,11 @@ class ClientController extends Controller
         $search = $request->search;
         $clients = Client::where(function ($query) use ($search) {
             if ($search) {
-                $query->where('zip', "$search");
-                $query->orWhere('name', 'LIKE', "%{$search}%");
+                #$query->where('zip', "$search");
+                #$query->orWhere('name', 'LIKE', "%{$search}%");
+                $query->Where('name', 'LIKE', "%{$search}%");
             }
-        })->get();
+        })->paginate();
 
         return view('clients.index', compact('clients'));
     }
@@ -37,14 +38,14 @@ class ClientController extends Controller
     {
         $data = $request->all();
 
-        if (!$data['child'])
-            $data['child'] = 0;
+        if (array_key_exists("child", $data))
+            $data["child"] = 1;
         else
-            $data['child'] = 1;
+            $data += ["child" => 0];
 
         Client::create($data);
 
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('msg', 'Eleitor Criado com Sucesso!');
     }
 
     public function destroy($id)
@@ -54,6 +55,6 @@ class ClientController extends Controller
 
         $client->delete();
 
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('msg', 'Eleitor Removido com Sucesso!');
     }
 }

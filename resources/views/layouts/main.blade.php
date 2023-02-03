@@ -9,7 +9,8 @@
     <title>@yield('title')</title>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto">
+    <header>
+    <div class="flex-auto p-4">
         <nav class="flex items-center justify-between flex-wrap bg-indigo-500 p-6">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
             <span class="font-semibold text-xl tracking-tight">Mala Web</span>
@@ -32,14 +33,23 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Admin</a>
+                <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 transition duration-500">Admin</a>
             </div>
             </div>
         </nav>
     </div>
-    <div class="container mx-auto">
+    </header>
+    <div class="flex-auto px-4">
+        @if (session('msg'))
+            <p class="bg-green-200 text-green-800 p10 text-center">{{session('msg')}}</p>
+        @endif
+    </div>
+    <div class="flex-auto px-4">
         @yield('content')
     </div>
+    <footer class="p-4">
+        <p class="text-black text-center">Mala Web &copy;</p>
+    </footer>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
